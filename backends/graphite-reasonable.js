@@ -145,7 +145,7 @@ var flush_stats = function graphite_flush(ts, metrics) {
 
   for (key in gauges) {
     //Compute the min, max, mean, stddev
-    var values = timers[key].sort(function(a, b) { return a - b; });
+    var values = gauges[key].sort(function(a, b) { return a - b; });
     var realLength = values.length;
     if (values.length === 0) {
       values = [0];
@@ -156,11 +156,12 @@ var flush_stats = function graphite_flush(ts, metrics) {
 
     var mean = total / values.length;
     var sumdiffs = 0; 
-    values.map(function(x) {  summdiffs+= (x - mean) * (x - mean); });
+    values.map(function(x) {  sumdiffs+= (x - mean) * (x - mean); });
 
     var variance = sumdiffs / values.length;
     var stddev = Math.sqrt(variance);
 
+    var message = "";
     message += "stats.gauges." + key + ".lower " + values[0] + ' ' + ts + "\n";
     message += "stats.gauges." + key + ".upper " + values[values.length - 1] + ' ' + ts + "\n";
     message += "stats.gauges." + key + ".mean " + mean + ' ' + ts + "\n";

@@ -64,6 +64,10 @@ function flushMetrics() {
     for (key in metrics.sets) {
       metrics.sets[key] = new set.Set();
     }
+
+    for (key in metrics.gauges) {
+      metrics.gauges[key] = [];
+    }
   });
 
   // Flush metrics to each backend.

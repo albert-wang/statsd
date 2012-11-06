@@ -59,5 +59,9 @@ Optional Variables:
 , port: 8125
 , backends: [ "./backends/graphite" ]
 , repeater: [ { host: "10.8.3.214", port: 8125 } ]
+<<<<<<< Updated upstream
 , repeaterProtocol: "udp4"
+=======
+, flushInterval: 5000
+>>>>>>> Stashed changes
 }
